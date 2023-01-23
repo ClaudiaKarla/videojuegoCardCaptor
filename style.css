@@ -1,0 +1,42 @@
+*{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-image: url(" ../imagen/fondojuego.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+.botones{
+    margin: 15px;
+}
+
+button{
+    padding: 60px;
+    border-radius: 50%;
+    width: 170px;
+    background-color:transparent;
+    color: black;
+    font-size: 20px;
+    border: 1px solid white;
+}
+
+.none{
+    display:none;
+}
+
+
+button:hover{
+    background-color: pink;
+    animation: heartBeat;
+        animation-duration: 2s;
+}

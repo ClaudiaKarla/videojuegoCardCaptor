@@ -80,7 +80,7 @@ disparar(){
 //Sonido
 shoot.play()
 
-die.play()
+//die.play()
 
 }
 adelante(){
@@ -138,6 +138,22 @@ class Enemigos{
         ctx.drawImage(this.img,this.x,this.y,50,80)
        
     }
+}
+
+//plumas de vida
+class plumas{
+    constructor(x){
+        this.x=x
+        this.y=0
+        this.img=0
+    }
+    bajar(){
+        this.y+5
+
+    }
+    //dibujarse(){
+      //  ctx.drawImage(pluma [this.img], this.x, this.y, 30,30)
+    //}
 }
 
 ctx.fillStyle="white"

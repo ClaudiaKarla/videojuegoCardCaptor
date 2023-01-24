@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+   }
+   
+   body{
+       width: 100vw;
+       height: 100vh;
+       background-image: url(" ../imagen/sk.gif");
+       background-repeat: no-repeat;
+       background-size: cover;
+       display: flex;
+       flex-direction:column;
+       align-items:center;
+   }
+
+   .botones{
+    margin: 15px;
+}
+
+button{
+    padding: 60px;
+    border-radius: 15px;
+    width: 200px;
+    height: 150px;
+    background-color:transparent;
+    color: black;
+    font-size: 20px;
+    border: 1px solid white;
+}
+
+button:hover{
+    background-color:papayawhip;
+    animation:rubberBand;
+        animation-duration: 2s;
+}
+
+h1{
+    font-size: 50px; 
+   text-align: center;
+   color: rgb(156, 23, 68);
+}
+
+p{
+    color: rgb(31, 58, 175);
+}

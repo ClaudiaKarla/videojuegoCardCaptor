@@ -4,11 +4,48 @@ console.log(lienzo)
 const ctx=lienzo.getContext("2d")
 console.log(ctx)
 
+//seleccion botones
+const menu=document.querySelector(".botones")
+
+//seleccion gameover
+const gameOver=document.querySelector(".gameOver")
+
 //imagenes
-const vida=new Image()
+const vida= new Image()
 vida.src=" ../imagen/kero2.png"
 console.log(vida)
 
+const enemig= new Image()
+enemig.src="../imagen/22.jpg"
+
+const enemig1= new Image()
+enemig1.src="../imagen/c2.png"
+
+const enemig2= new Image()
+enemig2.src="../imagen/3.1.webp"
+
+const enemig3= new Image()
+enemig3.src="../imagen/4.webp"
+
+const enemig4= new Image()
+enemig4.src="../imagen/Bosque.webp"
+
+const sak= new Image()
+sak.src=" ../imagen/ip.png"
+
+const baston= new Image()
+baston.src=" ../imagen/bastonS.jpg"
+
+const pluma= new Image()
+pluma.src=" ../imagen/pluma.jpg"
+
+//Sonidos
+const shoot=new Audio(" ../sonido/ataque.mp3")
+
+const die=new Audio(" ../sonido/gemeover.mp3")
+
+//ARREGLO ENEMIGOS
+const tiposEnemigos=[enemig, enemig1, enemig2, enemig3, enemig4]
 
 //ataque
 const ataques=[]
@@ -25,25 +62,32 @@ class Sakura{
         this.velocidad=10
         this.kills=0
         this.lifes=5
+        this.direccion="d"
+        this.img=sak
     }
 
 
 //Metodos
 dibujarse(){
-    ctx.fillRect(this.x, this.y, this.w, this.h)
+    ctx.drawImage(this.img,this.x, this.y, this.w, this.h)
 }
 
 
 disparar(){
-    console.log("Dispara")
     const ataque=new Ataque(this.x+this.w,this.y+(this.h/2))
     ataques.push(ataque)
-    console.log(ataques)
+
+//Sonido
+shoot.play()
+
+die.play()
+
 }
 adelante(){
-    if(this.x<1070){
+    if(this.x<1050){
      this.x+= this.velocidad
     }
+    this.img=sak
 }
 atras(){
     if(this.x>0){
@@ -51,12 +95,12 @@ atras(){
     }
 }
 arriba(){
-    if(this.y>40){
+    if(this.y>80){
         this.y-=this.velocidad
     }
 }
 abajo(){
-    if(this.y<520){
+    if(this.y<470){
         this.y+=this.velocidad
     }
 }
@@ -84,20 +128,22 @@ class Ataque{
 
 //enemigo
 class Enemigos{
-    constructor(x,y){
+    constructor(x,y,img){
         this.x=x;
         this.y=y;
+        this.img=img
     }
     dibujarse(){
         this.x -=1
-        ctx.fillRect(this.x,this.y,30,50)
+        ctx.drawImage(this.img,this.x,this.y,50,80)
+       
     }
 }
 
 ctx.fillStyle="white"
 //ctx.fillRect(10,145,15,15)
  
-const sakura=new Sakura(0,225,30,30)
+const sakura=new Sakura(0,225,60,80)
 console.log(sakura)
 
 //Escuchamos las Teclas
@@ -132,6 +178,12 @@ ctx.clearRect(0,0,1100,550)
 //dibujar Sakura
 sakura.dibujarse()
 
+//Verificar si sigue vivo
+if(sakura.lifes===0){
+    setGameOver()
+}
+
+
 //dibujar ataque
 ataques.forEach((ataque, indexAtaque)=>{
    ataque.x +=2
@@ -141,7 +193,7 @@ ataques.forEach((ataque, indexAtaque)=>{
 enemigo.forEach((enemigos, indexEnemigo)=>{
     console.log({ataqueX:ataque.x,ataqueY:ataque.y, enemigoX: enemigos.x, enemigoY: enemigos.y})
     
-    if(enemigos.x <=ataque.x+10 &&ataque.y>= enemigos.y && ataque.y<=enemigos.y+50){
+    if(enemigos.x <=ataque.x+10 &&ataque.y>= enemigos.y && ataque.y<=enemigos.y+80){
         enemigo.splice(indexEnemigo, 1)
         ataques.splice(indexAtaque, 1)
         sakura.kills++
@@ -156,14 +208,14 @@ enemigo.forEach((enemigos, indexEnemigo)=>{
     enemigos.dibujarse()
 
         if(enemigos.x<=0){
-            alert("perdiste")
+            setGameOver()
         }
 
 //sakura vs enemigo
-if(enemigos.x<=sakura.x+30 &&
-     sakura.y+30>=enemigos.y &&
+if(enemigos.x<=sakura.x+60 &&
+     sakura.y+80>=enemigos.y &&
      sakura.x<=enemigos.x&&
-     sakura.y<=enemigos.y+50
+     sakura.y<=enemigos.y+80
      ){
     sakura.lifes--
     enemigo.splice(indexEnemigo,1)
@@ -176,7 +228,7 @@ ctx.font="25px Arial"
 ctx.fillText(tiempo, 10,30)
 
 //pintar muertos
-ctx.fillText(`${sakura.kills} Eliminados`, 550,50)
+ctx.fillText(`${sakura.kills} Capturada`, 550,50)
 
 //ctx.fillText(`${sakura.lifes} `,810,50)
 
@@ -197,9 +249,11 @@ btn.addEventListener("click",()=>{
 function crearEnemigos(){
 
 setInterval(()=>{
-    const posicionY=Math.floor((Math.random()*480)+40)
+    const posicionY=Math.floor((Math.random()*400)+70)
     console.log(posicionY)
-    const a=new Enemigos(1100,posicionY)
+    const posicionAleatorio=Math.floor(Math.random()*tiposEnemigos.length)
+    const enemigoAleatorio=tiposEnemigos[posicionAleatorio]
+    const a=new Enemigos(1100,posicionY, enemigoAleatorio)
     enemigo.push(a)
 },3000)
 }
@@ -233,4 +287,17 @@ function mostrarVidas(){
  if(sakura.lifes===1){
     ctx.drawImage(vida,800,30,40,40)
  }
+}
+
+
+//Game Over
+
+function setGameOver(){
+    //agregar la clase none al menu y canvas
+    lienzo.classList.add("none")//lienzo.setAttribute("class","none")
+    menu.classList.add("none")
+    gameOver.classList.remove("none")
+
+
+    die.play()
 }

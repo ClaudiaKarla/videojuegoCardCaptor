@@ -31,18 +31,21 @@ const enemig4= new Image()
 enemig4.src="../imagen/Bosque.webp"
 
 const sak= new Image()
-sak.src=" ../imagen/ip.png"
+sak.src="../imagen/ip.png"
 
 const baston= new Image()
-baston.src=" ../imagen/bastonS.jpg"
+baston.src="../imagen/bastonS.jpg"
 
 const pluma= new Image()
-pluma.src=" ../imagen/pluma.jpg"
+pluma.src="../imagen/pluma.jpg"
+
+const shaooran= new Image()
+shaooran.src="../imagen/liS.webp"
 
 //Sonidos
-const shoot=new Audio(" ../sonido/ataque.mp3")
+const shoot=new Audio("../sonido/ataque.mp3")
 
-const die=new Audio(" ../sonido/gemeover.mp3")
+const die=new Audio("../sonido/gemeover.mp3")
 
 //ARREGLO ENEMIGOS
 const tiposEnemigos=[enemig, enemig1, enemig2, enemig3, enemig4]
@@ -50,8 +53,14 @@ const tiposEnemigos=[enemig, enemig1, enemig2, enemig3, enemig4]
 //ataque
 const ataques=[]
 
+//ataque2
+const ataque2=[]
+
 //enemigos
 const enemigo=[]
+
+//shaoran
+const shaorann=[]
 
 class Sakura{
     constructor(x,y,w,h){
@@ -66,7 +75,6 @@ class Sakura{
         this.img=sak
     }
 
-
 //Metodos
 dibujarse(){
     ctx.drawImage(this.img,this.x, this.y, this.w, this.h)
@@ -80,7 +88,6 @@ disparar(){
 //Sonido
 shoot.play()
 
-//die.play()
 
 }
 adelante(){
@@ -104,6 +111,45 @@ abajo(){
         this.y+=this.velocidad
     }
 }
+
+}
+
+   //shaoran
+   class Shaoran{
+    constructor(x,y,h){
+        this.x=x
+        this.y=y
+        this.h=h
+       this.img=shaooran
+       this.subir=false
+    }
+    
+    dibujarse(){
+        ctx.drawImage(this.img,this.x,this.y,50,80)
+        
+        if (this.y===470){
+            this.subir=true
+        }
+
+        if (this.y===10){
+            this.subir=false
+        }
+
+        if(this.y>=10&&this.subir===true){
+            this.y--
+        }
+        else if(this.y<470&&this.subir===false){
+            this.y++
+        }
+       
+    }
+
+
+    //////////////////////////////////////////////////////////
+    disparar(){
+     const ataque=new Ataque(this.x+this.w,this.y+(this.h/2))
+        ataques.push(ataque)
+    }
 
 }
 
@@ -140,27 +186,14 @@ class Enemigos{
     }
 }
 
-//plumas de vida
-class plumas{
-    constructor(x){
-        this.x=x
-        this.y=0
-        this.img=0
-    }
-    bajar(){
-        this.y+5
-
-    }
-    //dibujarse(){
-      //  ctx.drawImage(pluma [this.img], this.x, this.y, 30,30)
-    //}
-}
-
 ctx.fillStyle="white"
 //ctx.fillRect(10,145,15,15)
  
 const sakura=new Sakura(0,225,60,80)
 console.log(sakura)
+
+const shaoran=new Shaoran(1000,225,60,80)
+console.log(shaoran)
 
 //Escuchamos las Teclas
 document.addEventListener("keydown", (evento)=>{
@@ -188,11 +221,12 @@ let tiempo=0
 
 //funcion empezar juego
 function empezarJuego(){
-   
-console.log("Estamos jugando")
+
 ctx.clearRect(0,0,1100,550)
 //dibujar Sakura
 sakura.dibujarse()
+shaoran.dibujarse()
+
 
 //Verificar si sigue vivo
 if(sakura.lifes===0){
@@ -203,7 +237,6 @@ if(sakura.lifes===0){
 //dibujar ataque
 ataques.forEach((ataque, indexAtaque)=>{
    ataque.x +=2
-   console.log("dibujar")
         ataque.dibujarse()   
 
 enemigo.forEach((enemigos, indexEnemigo)=>{
@@ -218,6 +251,7 @@ enemigo.forEach((enemigos, indexEnemigo)=>{
 })
 
 })
+
 
 //dibujar enemigo
 enemigo.forEach((enemigos, indexEnemigo)=>{
@@ -245,8 +279,6 @@ ctx.fillText(tiempo, 10,30)
 
 //pintar muertos
 ctx.fillText(`${sakura.kills} Capturada`, 550,50)
-
-//ctx.fillText(`${sakura.lifes} `,810,50)
 
 mostrarVidas()
 
@@ -313,7 +345,6 @@ function setGameOver(){
     lienzo.classList.add("none")//lienzo.setAttribute("class","none")
     menu.classList.add("none")
     gameOver.classList.remove("none")
-
 
     die.play()
 }

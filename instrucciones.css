@@ -21,18 +21,18 @@
 }
 
 button{
-    padding: 60px;
+    padding: 10px;
     border-radius: 15px;
     width: 200px;
-    height: 150px;
+    height: 80px;
     background-color:transparent;
     color: black;
     font-size: 20px;
-    border: 1px solid white;
+    border:transparent;
 }
 
 button:hover{
-    background-color:rgb(207, 207, 107);
+    background-color:rgb(16, 142, 192);
     animation:tada;
         animation-duration: 2s;
 }

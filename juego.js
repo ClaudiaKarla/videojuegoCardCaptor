@@ -49,12 +49,19 @@ pausaBtn.addEventListener("click",()=>{
     }
 })
 
+pausaBtn.addEventListener("focus",function(){
+this.blur()
+})
+
 
 //seleccion botones
 const menu=document.querySelector(".botones")
 
 //seleccion gameover
 const gameOver=document.querySelector(".gameOver")
+
+//seleccion Ganaste
+const ganaste=document.querySelector(".ganaste")
 
 //imagenes
 const vida= new Image()
@@ -91,7 +98,9 @@ const shaooran= new Image()
 //Sonidos
 const shoot=new Audio("../sonido/ataque.mp3")
 
-const die=new Audio("../sonido/gemeover.mp3")
+const die=new Audio("../sonido/die.mpeg")
+
+const ganar=new Audio("../sonido/ts22.mpeg")
 
 //ARREGLO ENEMIGOS
 const tiposEnemigos=[enemig, enemig1, enemig2, enemig3, enemig4]
@@ -115,6 +124,7 @@ class Sakura{
         this.velocidad=10
         this.kills=0
         this.lifes=5
+        this.capturas=0
         this.direccion="d"
         this.img=sak
     }
@@ -204,7 +214,7 @@ class Ataque{
     }
     dibujarse(){
         ctx.fillRect(this.x,this.y, 10, 5)
-            console.log({x: this.x})
+          //  console.log({x: this.x})
 
         if(this.x>1080){
             ataques.shift()
@@ -237,7 +247,7 @@ const shaoran=new Shaoran(1000,225,60,80)
 
 //Escuchamos las Teclas
 document.addEventListener("keydown", (evento)=>{
- //console.log(evento.key)
+ console.log(evento.key)
  switch (evento.key){
     case "ArrowRight":
      sakura.adelante()
@@ -317,6 +327,8 @@ enemigo.forEach((enemigos, indexEnemigo)=>{
 
         if(enemigos.x<=0){
             setGameOver()
+            cancelAnimationFrame(requestReference)
+            clearInterval(idCrearEnemigos)
         }
 
 //sakura vs enemigo
@@ -332,16 +344,23 @@ if(enemigos.x<=sakura.x+60 &&
 })
 
 tiempo ++
-ctx.font="25px Arial"
+ctx.font="25px Arial" 
 ctx.fillText(tiempo, 10,30)
 
-//pintar muertos
-ctx.fillText(`${sakura.kills} Capturada`, 550,50)
+//pintar capturas
+ctx.fillText(`${sakura.kills} Cartas Capturadas`, 450,50)
+
+//capturar cartas ganas
+if(sakura.kills>=15){
+    setGanaste()
+    cancelAnimationFrame(requestReference)
+    clearInterval(idCrearEnemigos)
+    }
 
 mostrarVidas()
 
    let reqId=requestAnimationFrame(empezarJuego)
-   console.log(reqId)
+   //console.log(reqId)
     requestReference=reqId
 
 }
@@ -408,6 +427,15 @@ function setGameOver(){
     lienzo.classList.add("none")//lienzo.setAttribute("class","none")
     menu.classList.add("none")
     gameOver.classList.remove("none")
-
+    
     die.play()
+}
+
+//ganaste
+function setGanaste(){
+   lienzo.classList.add("none")//lienzo.setAttribute("class","none")
+   menu.classList.add("none")
+  ganaste.classList.remove("none")
+
+  ganar.play()
 }

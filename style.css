@@ -21,8 +21,8 @@ body{
 }
 
 button{
-    padding: 60px;
-    border-radius: 50%;
+    padding: 30px;
+    border-radius: 30px;
     width: 170px;
     background-color:transparent;
     color: black;
@@ -36,7 +36,7 @@ button{
 
 
 button:hover{
-    background-color: pink;
+    background-color: papayawhip;
     animation: heartBeat;
         animation-duration: 2s;
 }
@@ -55,14 +55,44 @@ button:hover{
 }
 
 .gameOver button{
-    color: white;
-    border-color: black;
+    color: green;
+    border: transparent;
    
 }
 
 .gameOver button:hover{
     background-color: transparent;
-    color: black;
-    animation: shakeY;
+    animation: zoomIn;
         animation-duration: 2s;
+}
+
+
+.ganaste{
+    width: 100vw;
+    height: 100vh;
+    background-image: url(" ../imagen/ganaste1.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.ganaste button{
+    background-color: blanchedalmond;
+    color: red;
+    border: 2px solid black;
+   
+}
+
+.ganaste button:hover{
+    background-color: transparent;
+    animation: zoomIn;
+        animation-duration: 2s;
+      
+}
+
+.ganaste h1{
+    background-color: chartreuse;
+    font-size: 30px ;
 }

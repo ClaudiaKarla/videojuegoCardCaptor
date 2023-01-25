@@ -21,14 +21,14 @@
 }
 
 button{
-    padding: 60px;
+    padding: 10px;
     border-radius: 15px;
     width: 200px;
-    height: 150px;
+    height: 80px;
     background-color:transparent;
-    color: black;
+    color: rgb(192, 174, 13);
     font-size: 20px;
-    border: 1px solid white;
+    border: transparent;
 }
 
 button:hover{

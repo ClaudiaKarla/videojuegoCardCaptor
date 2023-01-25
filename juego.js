@@ -52,8 +52,6 @@ const tiposEnemigos=[enemig, enemig1, enemig2, enemig3, enemig4]
 
 //ataque
 const ataques=[]
-
-//ataque2
 const ataque2=[]
 
 //enemigos
@@ -87,9 +85,8 @@ disparar(){
 
 //Sonido
 shoot.play()
-
-
 }
+
 adelante(){
     if(this.x<1050){
      this.x+= this.velocidad
@@ -116,9 +113,10 @@ abajo(){
 
    //shaoran
    class Shaoran{
-    constructor(x,y,h){
+    constructor(x,y,h,w){
         this.x=x
         this.y=y
+        this.w=w
         this.h=h
        this.img=shaooran
        this.subir=false
@@ -144,11 +142,9 @@ abajo(){
        
     }
 
-
-    //////////////////////////////////////////////////////////
-    disparar(){
-     const ataque=new Ataque(this.x+this.w,this.y+(this.h/2))
-        ataques.push(ataque)
+    disparar2(){
+        const ataq=new Ataque(this.x+this.w,this.y+(this.h/2))
+        ataque2.push(ataq)
     }
 
 }
@@ -163,10 +159,11 @@ class Ataque{
     dibujarse(){
         ctx.fillRect(this.x,this.y, 10, 5)
         console.log({x: this.x})
-   
+
         if(this.x>1080){
             ataques.shift()
         }
+
     }
        
 }
@@ -213,6 +210,7 @@ document.addEventListener("keydown", (evento)=>{
                 break;
                 case " ":
                     sakura.disparar()
+                    shaoran.disparar2()
                     break;
  }
 })
@@ -253,6 +251,23 @@ enemigo.forEach((enemigos, indexEnemigo)=>{
 })
 
 
+//dibujar ataque2
+ataque2.forEach((ataq)=>{
+    ataq.x -=1
+         ataq.dibujarse() 
+         
+         if(sakura.x<=ataq.x+5&&
+            ataq.y+10>=sakura.y&&
+            ataq.x<=sakura.x+60&&
+            ataq.y<=sakura.y+80
+             ){
+                 sakura.lifes--
+               ataque2.shift()
+             }
+})
+
+
+
 //dibujar enemigo
 enemigo.forEach((enemigos, indexEnemigo)=>{
     enemigos.dibujarse()
@@ -271,7 +286,15 @@ if(enemigos.x<=sakura.x+60 &&
     enemigo.splice(indexEnemigo,1)
 }
 
+
+
 })
+
+
+
+
+
+
 
 tiempo ++
 ctx.font="25px Arial"

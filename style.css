@@ -61,6 +61,8 @@ button:hover{
 }
 
 .gameOver button:hover{
-    background-color: palevioletred;
+    background-color: transparent;
     color: black;
+    animation: shakeY;
+        animation-duration: 2s;
 }

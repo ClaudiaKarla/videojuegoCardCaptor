@@ -1,8 +1,54 @@
 const lienzo= document.getElementById("Card")
-console.log(lienzo)
+    console.log(lienzo)
 
 const ctx=lienzo.getContext("2d")
-console.log(ctx)
+    console.log(ctx)
+
+    let requestReference
+
+    let idCrearEnemigos
+
+//nivel1
+const nivel=document.getElementById("nivel")
+
+let frecEnemigos= 3000
+//let cantidadBalas=4
+
+    nivel.addEventListener("click",()=>{
+        switch(nivel.innerText){  
+            case "Facil":
+                nivel.innerText="Medio"
+                frecEnemigos=2500
+                //cantidadBalas=3
+                break;
+                    case "Medio":
+                        nivel.innerText="Dificil"
+                        frecEnemigos=2000
+                        //cantidadBalas=2
+                            break;
+                                default:
+                                    nivel.innerText="Facil"
+                                    frecEnemigos=3000
+                                    //cantidadBalas=4
+                                        break;
+    }
+})
+
+//Pausa
+let pausaBtn=document.getElementById("pausaToggle")
+
+pausaBtn.addEventListener("click",()=>{
+    if(pausaBtn.innerText==="Pausa"){
+        pausaBtn.innerText="Play"
+        cancelAnimationFrame(requestReference)
+        clearInterval(idCrearEnemigos)
+    }else{
+        pausaBtn.innerText="Pausa"
+        empezarJuego()
+        crearEnemigos()
+    }
+})
+
 
 //seleccion botones
 const menu=document.querySelector(".botones")
@@ -12,35 +58,35 @@ const gameOver=document.querySelector(".gameOver")
 
 //imagenes
 const vida= new Image()
-vida.src=" ../imagen/kero2.png"
-console.log(vida)
+    vida.src=" ../imagen/kero2.png"
+        console.log(vida)
 
 const enemig= new Image()
-enemig.src="../imagen/22.jpg"
+    enemig.src="../imagen/22.jpg"
 
 const enemig1= new Image()
-enemig1.src="../imagen/c2.png"
+    enemig1.src="../imagen/c2.png"
 
 const enemig2= new Image()
-enemig2.src="../imagen/3.1.webp"
+    enemig2.src="../imagen/3.1.webp"
 
 const enemig3= new Image()
-enemig3.src="../imagen/4.webp"
+    enemig3.src="../imagen/4.webp"
 
 const enemig4= new Image()
-enemig4.src="../imagen/Bosque.webp"
+    enemig4.src="../imagen/Bosque.webp"
 
 const sak= new Image()
-sak.src="../imagen/ip.png"
+    sak.src="../imagen/ip.png"
 
 const baston= new Image()
-baston.src="../imagen/bastonS.jpg"
+    baston.src="../imagen/bastonS.jpg"
 
 const pluma= new Image()
-pluma.src="../imagen/pluma.jpg"
+    pluma.src="../imagen/pluma.jpg"
 
 const shaooran= new Image()
-shaooran.src="../imagen/liS.webp"
+    shaooran.src="../imagen/liS.webp"
 
 //Sonidos
 const shoot=new Audio("../sonido/ataque.mp3")
@@ -81,7 +127,7 @@ dibujarse(){
 
 disparar(){
     const ataque=new Ataque(this.x+this.w,this.y+(this.h/2))
-    ataques.push(ataque)
+        ataques.push(ataque)
 
 //Sonido
 shoot.play()
@@ -89,9 +135,9 @@ shoot.play()
 
 adelante(){
     if(this.x<1050){
-     this.x+= this.velocidad
+        this.x+= this.velocidad
     }
-    this.img=sak
+        this.img=sak
 }
 atras(){
     if(this.x>0){
@@ -144,7 +190,7 @@ abajo(){
 
     disparar2(){
         const ataq=new Ataque(this.x+this.w,this.y+(this.h/2))
-        ataque2.push(ataq)
+            ataque2.push(ataq)
     }
 
 }
@@ -158,16 +204,13 @@ class Ataque{
     }
     dibujarse(){
         ctx.fillRect(this.x,this.y, 10, 5)
-        console.log({x: this.x})
+            console.log({x: this.x})
 
         if(this.x>1080){
             ataques.shift()
         }
-
-    }
-       
+    }  
 }
-
 
 //enemigo
 class Enemigos{
@@ -187,10 +230,10 @@ ctx.fillStyle="white"
 //ctx.fillRect(10,145,15,15)
  
 const sakura=new Sakura(0,225,60,80)
-console.log(sakura)
+    console.log(sakura)
 
 const shaoran=new Shaoran(1000,225,60,80)
-console.log(shaoran)
+    console.log(shaoran)
 
 //Escuchamos las Teclas
 document.addEventListener("keydown", (evento)=>{
@@ -198,21 +241,21 @@ document.addEventListener("keydown", (evento)=>{
  switch (evento.key){
     case "ArrowRight":
      sakura.adelante()
-     break; 
-     case "ArrowLeft":
-        sakura.atras()
-        break;
-        case "ArrowUp":
-            sakura.arriba()
-            break;
-            case "ArrowDown": 
-                sakura.abajo()
-                break;
-                case " ":
-                    sakura.disparar()
-                    shaoran.disparar2()
+        break; 
+            case "ArrowLeft":
+                sakura.atras()
                     break;
- }
+                        case "ArrowUp":
+                            sakura.arriba()
+                                 break;
+                                    case "ArrowDown": 
+                                     sakura.abajo()
+                                         break;
+                                            case " ":
+                                                sakura.disparar()
+                                                     shaoran.disparar2()
+                                                        break;
+     }
 })
 
 let tiempo=0
@@ -243,7 +286,7 @@ enemigo.forEach((enemigos, indexEnemigo)=>{
     if(enemigos.x <=ataque.x+10 &&ataque.y>= enemigos.y && ataque.y<=enemigos.y+80){
         enemigo.splice(indexEnemigo, 1)
         ataques.splice(indexAtaque, 1)
-        sakura.kills++
+            sakura.kills++
     }
 
 })
@@ -262,7 +305,7 @@ ataque2.forEach((ataq)=>{
             ataq.y<=sakura.y+80
              ){
                  sakura.lifes--
-               ataque2.shift()
+                    ataque2.shift()
              }
 })
 
@@ -286,15 +329,7 @@ if(enemigos.x<=sakura.x+60 &&
     enemigo.splice(indexEnemigo,1)
 }
 
-
-
 })
-
-
-
-
-
-
 
 tiempo ++
 ctx.font="25px Arial"
@@ -305,7 +340,10 @@ ctx.fillText(`${sakura.kills} Capturada`, 550,50)
 
 mostrarVidas()
 
-   requestAnimationFrame(empezarJuego)
+   let reqId=requestAnimationFrame(empezarJuego)
+   console.log(reqId)
+    requestReference=reqId
+
 }
 
 //Seleccionamos el btn y empezamos el juego
@@ -314,19 +352,22 @@ btn.addEventListener("click",()=>{
     empezarJuego()
     crearEnemigos()
     btn.classList.add("none")
+
+    nivel.setAttribute("disabled","" )
+
 })
 
 //Creacion de los enemigos
 function crearEnemigos(){
 
-setInterval(()=>{
+idCrearEnemigos=setInterval(()=>{
     const posicionY=Math.floor((Math.random()*400)+70)
     console.log(posicionY)
     const posicionAleatorio=Math.floor(Math.random()*tiposEnemigos.length)
     const enemigoAleatorio=tiposEnemigos[posicionAleatorio]
     const a=new Enemigos(1100,posicionY, enemigoAleatorio)
     enemigo.push(a)
-},3000)
+},frecEnemigos)
 }
 
 //mostrar vidas
@@ -362,7 +403,6 @@ function mostrarVidas(){
 
 
 //Game Over
-
 function setGameOver(){
     //agregar la clase none al menu y canvas
     lienzo.classList.add("none")//lienzo.setAttribute("class","none")

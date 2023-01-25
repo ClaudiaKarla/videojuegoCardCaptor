@@ -373,7 +373,7 @@ btn.addEventListener("click",()=>{
     btn.classList.add("none")
 
     nivel.setAttribute("disabled","" )
-
+    
 })
 
 //Creacion de los enemigos

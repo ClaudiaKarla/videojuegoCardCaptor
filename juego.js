@@ -65,42 +65,42 @@ const ganaste=document.querySelector(".ganaste")
 
 //imagenes
 const vida= new Image()
-    vida.src="../imagen/kero2.png"
+    vida.src="./imagen/kero2.png"
         console.log(vida)
 
 const enemig= new Image()
-    enemig.src="../imagen/22.jpg"
+    enemig.src="./imagen/22.jpg"
 
 const enemig1= new Image()
-    enemig1.src="../imagen/c2.png"
+    enemig1.src="./imagen/c2.png"
 
 const enemig2= new Image()
-    enemig2.src="../imagen/3.1.webp"
+    enemig2.src="./imagen/3.1.webp"
 
 const enemig3= new Image()
-    enemig3.src="../imagen/4.webp"
+    enemig3.src="./imagen/4.webp"
 
 const enemig4= new Image()
-    enemig4.src="../imagen/Bosque.webp"
+    enemig4.src="./imagen/Bosque.webp"
 
 const sak= new Image()
-    sak.src="../imagen/ip.png"
+    sak.src="./imagen/ip.png"
 
 const baston= new Image()
-    baston.src="../imagen/estrellau.webp"
+    baston.src="./imagen/estrellau.webp"
 
 const pluma= new Image()
-    pluma.src="../imagen/pluma.jpg"
+    pluma.src="./imagen/pluma.jpg"
 
 const shaooran= new Image()
-    shaooran.src="../imagen/liS.webp"
+    shaooran.src="./imagen/liS.webp"
 
 //Sonidos
-const shoot=new Audio("../sonido/ataque.mp3")
+const shoot=new Audio("./sonido/ataque.mp3")
 
-const die=new Audio("../sonido/die.mpeg")
+const die=new Audio("./sonido/die.mpeg")
 
-const ganar=new Audio("../sonido/ts22.mpeg")
+const ganar=new Audio("./sonido/ts22.mpeg")
 
 //ARREGLO ENEMIGOS
 const tiposEnemigos=[enemig, enemig1, enemig2, enemig3, enemig4]

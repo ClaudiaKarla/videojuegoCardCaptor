@@ -65,7 +65,7 @@ const ganaste=document.querySelector(".ganaste")
 
 //imagenes
 const vida= new Image()
-    vida.src=" ../imagen/kero2.png"
+    vida.src="../imagen/kero2.png"
         console.log(vida)
 
 const enemig= new Image()
@@ -344,11 +344,13 @@ if(enemigos.x<=sakura.x+60 &&
 })
 
 tiempo ++
-ctx.font="25px Arial" 
+ctx.font="25px arial"
+//ctx.strokeStyle="#369";
+ctx.fillStyle="black"
 ctx.fillText(tiempo, 10,30)
 
 //pintar capturas
-ctx.fillText(`${sakura.kills} Cartas Capturadas`, 450,50)
+ctx.fillText(`${sakura.kills} Cartas Capturadas`, 400,50)
 
 //capturar cartas ganas
 if(sakura.kills>=5){

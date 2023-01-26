@@ -8,7 +8,7 @@
    body{
        width: 100vw;
        height: 100vh;
-       background-image: url(" ../imagen/kp.gif");
+       background-image: url("../imagen/kp.gif");
        background-repeat: no-repeat;
        background-size: cover;
        display: flex;

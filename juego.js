@@ -87,7 +87,7 @@ const sak= new Image()
     sak.src="../imagen/ip.png"
 
 const baston= new Image()
-    baston.src="../imagen/bastonS.jpg"
+    baston.src="../imagen/estrellau.webp"
 
 const pluma= new Image()
     pluma.src="../imagen/pluma.jpg"
@@ -213,7 +213,7 @@ class Ataque{
  
     }
     dibujarse(){
-        ctx.fillRect(this.x,this.y, 10, 5)
+        ctx.drawImage(baston,this.x,this.y, 25, 25)
           //  console.log({x: this.x})
 
         if(this.x>1080){
@@ -293,7 +293,7 @@ ataques.forEach((ataque, indexAtaque)=>{
 enemigo.forEach((enemigos, indexEnemigo)=>{
     console.log({ataqueX:ataque.x,ataqueY:ataque.y, enemigoX: enemigos.x, enemigoY: enemigos.y})
     
-    if(enemigos.x <=ataque.x+10 &&ataque.y>= enemigos.y && ataque.y<=enemigos.y+80){
+    if(enemigos.x <=ataque.x+25 &&ataque.y>= enemigos.y && ataque.y<=enemigos.y+80){
         enemigo.splice(indexEnemigo, 1)
         ataques.splice(indexAtaque, 1)
             sakura.kills++
@@ -309,8 +309,8 @@ ataque2.forEach((ataq)=>{
     ataq.x -=1
          ataq.dibujarse() 
          
-         if(sakura.x<=ataq.x+5&&
-            ataq.y+10>=sakura.y&&
+         if(sakura.x<=ataq.x+25&&
+            ataq.y+25>=sakura.y&&
             ataq.x<=sakura.x+60&&
             ataq.y<=sakura.y+80
              ){
@@ -351,7 +351,7 @@ ctx.fillText(tiempo, 10,30)
 ctx.fillText(`${sakura.kills} Cartas Capturadas`, 450,50)
 
 //capturar cartas ganas
-if(sakura.kills>=15){
+if(sakura.kills>=5){
     setGanaste()
     cancelAnimationFrame(requestReference)
     clearInterval(idCrearEnemigos)

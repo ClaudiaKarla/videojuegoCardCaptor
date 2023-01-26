@@ -8,7 +8,7 @@
    body{
        width: 100vw;
        height: 100vh;
-       background-image: url(" ../imagen/sk.gif");
+       background-image: url(" ../imagen/cc.gif");
        background-repeat: no-repeat;
        background-size: cover;
        display: flex;
@@ -26,7 +26,7 @@ button{
     width: 200px;
     height: 80px;
     background-color:transparent;
-    color: rgb(192, 174, 13);
+    color: orange;
     font-size: 20px;
     border: transparent;
 }
@@ -39,7 +39,7 @@ button:hover{
 
 h1{
     font-size: 50px; 
-   color: rgb(156, 23, 68);
+   color: goldenrod;
 }
 
 p{

@@ -282,6 +282,7 @@ shaoran.dibujarse()
 //Verificar si sigue vivo
 if(sakura.lifes===0){
     setGameOver()
+   
 }
 
 
@@ -327,8 +328,8 @@ enemigo.forEach((enemigos, indexEnemigo)=>{
 
         if(enemigos.x<=0){
             setGameOver()
-            cancelAnimationFrame(requestReference)
-            clearInterval(idCrearEnemigos)
+            window.cancelAnimationFrame()
+          
         }
 
 //sakura vs enemigo
@@ -353,16 +354,14 @@ ctx.fillText(tiempo, 10,30)
 ctx.fillText(`${sakura.kills} Cartas Capturadas`, 400,50)
 
 //capturar cartas ganas
-if(sakura.kills>=5){
+if(sakura.kills>=15){
     setGanaste()
-    cancelAnimationFrame(requestReference)
-    clearInterval(idCrearEnemigos)
+    window.cancelAnimationFrame()
     }
 
 mostrarVidas()
 
    let reqId=requestAnimationFrame(empezarJuego)
-   //console.log(reqId)
     requestReference=reqId
 
 }
@@ -373,7 +372,7 @@ btn.addEventListener("click",()=>{
     empezarJuego()
     crearEnemigos()
     btn.classList.add("none")
-
+   
     nivel.setAttribute("disabled","" )
     
 })
@@ -428,16 +427,18 @@ function setGameOver(){
     //agregar la clase none al menu y canvas
     lienzo.classList.add("none")//lienzo.setAttribute("class","none")
     menu.classList.add("none")
-    gameOver.classList.toggle("none")
+    gameOver.classList.remove("none")
     
     die.play()
 }
+
 
 //ganaste
 function setGanaste(){
    lienzo.classList.add("none")//lienzo.setAttribute("class","none")
    menu.classList.add("none")
   ganaste.classList.remove("none")
-
+ 
   ganar.play()
 }
+

@@ -428,7 +428,7 @@ function setGameOver(){
     //agregar la clase none al menu y canvas
     lienzo.classList.add("none")//lienzo.setAttribute("class","none")
     menu.classList.add("none")
-    gameOver.classList.remove("none")
+    gameOver.classList.toggle("none")
     
     die.play()
 }

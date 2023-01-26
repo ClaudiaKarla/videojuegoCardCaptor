@@ -8,13 +8,12 @@
 body{
     width: 100vw;
     height: 100vh;
-    background-image: url("../imagen/sakuraf.gif");
+    background-image: url("./imagen/sakuraf.gif");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     flex-direction:column;
     align-items: center;
-    text-decoration: solid black;
 }
 
 .botones{
@@ -46,7 +45,7 @@ button:hover{
 .gameOver{
     width: 100vw;
     height: 100vh;
-    background-image: url("../imagen/gameoverfinal.png");
+    background-image: url("./imagen/gameoverfinal.png");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -71,7 +70,7 @@ button:hover{
 .ganaste{
     width: 100vw;
     height: 100vh;
-    background-image: url("../imagen/ganaste1.gif");
+    background-image: url("./imagen/ganaste1.gif");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;

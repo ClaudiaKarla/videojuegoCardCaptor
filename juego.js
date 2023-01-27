@@ -354,7 +354,7 @@ ctx.fillText(tiempo, 10,30)
 ctx.fillText(`${sakura.kills} Cartas Capturadas`, 400,50)
 
 //capturar cartas ganas
-if(sakura.kills>=15){
+if(sakura.kills>=5){
     setGanaste()
     window.cancelAnimationFrame()
     }
